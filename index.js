@@ -15,7 +15,7 @@ module.exports = class {
         searchTerm.split(' ').forEach(term => {
             terms.$and.push({
                 [fieldToSearch]: {
-                    $regex: new RegExp(mainSearchEscape(term), 'im')
+                    $regex: new RegExp(mainSearchEscape(term.toLowerCase()), 'im')
                 }
             })
         })

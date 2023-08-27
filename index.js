@@ -22,4 +22,16 @@ module.exports = class {
         return terms
     }
 
+    idStatement = ({ base, fieldToSearch, searchTerm }) => {
+        const terms = {
+            $and: base || []
+        }
+        terms.$and.push({
+            [fieldToSearch]: {
+                $regex: new RegExp(`^${mainSearchEscape(searchTerm)}`, 'i')
+            }
+        })
+        return terms
+    }
+
     }

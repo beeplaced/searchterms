@@ -22,6 +22,20 @@ module.exports = class {
         return terms
     }
 
+    andStatementsArray = ({ base, fieldToSearch, searchTerm }) => {
+        const terms = {
+            $and: base || []
+        }
+        searchTerm.split(' ').forEach(term => {
+            terms.$and.push({
+                [fieldToSearch]: {
+                    $all: [new RegExp(mainSearchEscape(term.toLowerCase()), 'im')]
+                }
+            })
+        })
+        return terms
+    }
+
     idStatement = ({ base, fieldToSearch, searchTerm }) => {
         const terms = {
             $and: base || []

@@ -1,14 +1,14 @@
+// const mainSearchEscape = term => term
+// .replace(/\(/g, '\\(')
+// .replace(/\)/g, '\\)')
+// .replace(/[+?]/g, '');
+
 const mainSearchEscape = term => term
-.replace(/\(/g, '\\(')
-.replace(/\)/g, '\\)')
-.replace(/[+?]/g, '');
+    .replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
 module.exports = class {
 
     andStatements = ({ base, fieldToSearch, searchTerm }) => {
-        // base could be [{ 'status.status': { $ne: 99 } }, { supplier: { $ne: '' } }]
-        // fieldToSearch = String
-        // searchterm = String, searchterms divided by ' '
         const terms = {
             $and: base || []
         }
